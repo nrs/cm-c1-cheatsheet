@@ -1,0 +1,555 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{hyperref}
+% \usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{mdframed}
+
+% hippopotato
+\usepackage{./hippopotato/hippopotato}
+
+% lazyeqn - math symbols
+\usepackage{./lazyeqn/lazyeqn}
+
+\newcommand{\veps}{\vareps}
+\newcommand{\ext}{\ensuremath{\textup{ext}}}
+\newcommand{\inte}{\ensuremath{\textup{int}}}
+\newcommand{\rhoz}{\tfrac{1}{\rho_0}}
+
+\newcommand{\rtwo}{\UI\hspace{-0.07em}\UI}
+\newcommand{\rthree}{\UI\hspace{-0.07em}\UI\hspace{-0.07em}\UI}
+\def\Bveps{\Bvarepsilon}
+
+\def\mybox#1{\fbox{%
+    \addtolength{\linewidth}{-2\fboxsep}%
+    \addtolength{\linewidth}{-2\fboxrule}%
+    \begin{minipage}[t]{\linewidth}%
+      % \vspace{-0.6em}%
+      #1%
+      % \vspace{0.5em}%
+    \end{minipage}%
+  }%
+}
+\def\myboxeqn#1{\fbox{%
+    \addtolength{\linewidth}{-2\fboxsep}%
+    \addtolength{\linewidth}{-2\fboxrule}%
+    \begin{minipage}[t]{\linewidth}%
+      \vspace{-0.6em}%
+      #1%
+      \vspace{-1em}%
+    \end{minipage}%
+  }%
+}
+
+\usepackage{empheq}
+
+\newcommand*\widefbox[1]{\fbox{#1}}
+% \newcommand*\widefbox[1]{\fbox{\hspace{0.5em}#1\hspace{0.5em}}}
+
+% \setlist{nolistsep,leftmargin=*}
+
+% Fonts
+%\usepackage[garamond]{mathdesign}
+%\usepackage{times}
+%\usepackage{pxfonts}%ccfonts,times,mathpazo,mathpple
+\usepackage[T1]{fontenc}
+
+% Search directory for image files
+\graphicspath{{./img/}}
+
+% To Do:
+% \listoffigures \listoftables
+% \setcounter{secnumdepth}{0}
+
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+        { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+        {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+                {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+                {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+% \renewcommand{\paragraph}{\@startsection{paragraph}{3}{0mm}%
+%                                 {-1ex plus -.5ex minus -.2ex}%
+%                                 {1ex plus .2ex}%
+%                                 {\normalfont\footnotesize\bfseries}}
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+                                    {1.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\footnotesize\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols*}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+  \Large{\textbf{cm--c1--cheatsheet}} \\[0.5ex]
+  \footnotesize{Computational Mechanics as taught by Lehrstuhl 1 of Institut für Mechanik
+    (Bauwesen) in Universit\"at Stuttgart.\\
+    Last updated: \today}
+\end{center}
+{\scriptsize
+Note: This material is divided into 2 main parts as mechanics in 1d and 3d.
+These represent two separate courses: \emph{C2: Computational Mechanics of
+  Materials} --- and --- \emph{E2-02: Micromechanics of Materials and Homogenization
+  Methods} as a part of the Computational Mechanics of Materials and Structures
+(COMMAS) international MSc. programme.
+}
+
+\section{Thermodynamics of 1d Continuum}
+
+\section{Requirements to Material Equations}
+
+\section{Representative Material Models}
+
+\section{Numerical Solution Techniques}
+
+\section{Viscoelasticity}
+
+\section{Elastoplasticity}
+
+\section{Perzyna-type Viscoplasticity}
+
+
+\rule{0.3\linewidth}{0.25pt}
+End of semester 1
+\newpage
+\section{Thermodynamics of General Internal Variable Formulation}
+
+\subsection{Basic Kinematics at Small Strains}
+$\CB \subset \IR^3$ is the continuous body and
+$\Vu:\CB\times\UI\rightarrow\CB^3$ is the displacement map at a material point
+$\Vx\in\CB$ at time $t\in\UI$.
+\begin{align}
+  \Vv(\Vx, t) &= \ddelt\Vu(\Vx,t) = \dot{\Vu}\\
+  \Va(\Vx, t) &= \ddelt\Vv(\Vx,t) = \ddot{\Vu}
+\end{align}
+The linear strain tensor:
+\begin{equation}
+  \Bveps(\Vx, t) = \sym(\nabla\Vu) = \half(\nabla\Vu+\nabla\Vu\tra)
+\end{equation}
+Decomposed to volumetric--deviatoric ($e$--$\Bveps'$) parts as
+\begin{align}
+  e &:= \tr(\Bveps) = \Bveps_{11} + \Bveps_{22} + \Bveps_{33} = \Bveps_{\textup{vol}}\\
+  \Bveps' &:= \Bveps - \third e\,\Vone = \Bveps_{\textup{dev}}
+\end{align}
+\subsection{Definition of Stress and Heat Flux}
+\begin{itemize}
+\item traction vector $\Vt = \widehat{\Vt}(\Vx, t;\Vn) = \Bsigma\Vn$
+\item heat flux $\Vh = \widehat{\Vh}(\Vx, t;\Vn) = \Vq\cdot\Vn$
+\end{itemize}
+\subsection{Balance Equations}
+Associated with part $\CP\subset\CB$ are the following physical quantities.
+
+\begin{center}
+  \begin{tabular}{r p{0em}<{} l}
+    Mass & $m$ & $= \int_\CP\rbr{\rho}\dV$\\[0.8ex]
+    Momentum & $\VI$ & $= \int_\CP\rbr{\rho\Vv}\dV$\\[0.8ex]
+    M.of Momentum &  $\VL$ & $= \int_\CP\rbr{\Vx\times\rho\Vv}\dV$ \\[0.8ex]
+    Kinetic energy & $K$ & $= \int_\CP\rbr{\half\rho\Vv\cdot\Vv}\dV$ \\[0.8ex]
+    Entropy & $H$ & $=\int_\CP\rbr{\rho\eta}\dV$ \\[0.8ex]
+    Internal energy & $E$ & $=\int_\CP\rbr{\rho e}\dV$ \\[0.8ex]
+    Entropy production & $\varGamma$ & $=\int_\CP\rbr{\rho\gamma}\dV$ \\[0.8ex]
+  \end{tabular}
+\end{center}
+with the following quantities
+\begin{center}
+  \begin{tabular}{l l}
+    $\rho(\Vx,t)$ & Density field\\
+    $e(\Vx,t)$ & Internal energy field\\
+    $\eta(\Vx,t)$ & Specific entropy\\
+    $\gamma(\Vx,t)$ & Specific entropy production\\
+  \end{tabular}
+\end{center}
+Global loadings on $\CP$ are
+%
+\begin{center}
+  \begin{tabular}{r p{0em}<{} l}
+    Mechanical force & $\VF$ & $= \int_\CP\rbr{\rho\Vb}\dV+\int_{\partial\CP}\rbr{\Vt}\dA$\\[0.8ex]
+    Mechanical couple & $\VM$ & $= \int_\CP\rbr{\Vx\times\rho\Vb}\dV+\int_{\partial\CP}\rbr{\Vx\times\Vt}\dA$\\[0.8ex]
+    Mechanical power &  $P$ & $= \int_\CP\rbr{\rho\Vb\cdot\Vv}\dV + \int_{\partial\CP}\rbr{\Vt\cdot\Vv}\dA$ \\[0.8ex]
+    Thermal power & $Q$ & $= \int_\CP\rbr{\rho\gamma}\dV - \int_{\partial\CP}\rbr{h}\dA$ \\[0.8ex]
+    Entropy power & $S$ & $=\int_\CP\,(\frac{\rho\gamma}{\theta})\,\dV - \int_{\partial\CP}\,(\textstyle\frac{h}{\theta})\,\dA$ \\[0.8ex]
+  \end{tabular}
+\end{center}
+Local balance equations are obtained by
+
+\begin{enumerate}
+\item Insert the Cauchy-type equations
+  \begin{equation}
+    \Vt = \Bsigma\Vn \quad , \quad h = \Vq \cdot\Vn
+  \end{equation}
+\item Apply Gauss-type theorem to convert volume int. to surface int.
+  \begin{equation}
+    \int_{\partial\CP}\rbr{\cdot}\Vn\dA=\int_\CP\div\rbr{\cdot}\dV
+  \end{equation}
+\item Apply localization theorem by shrinking the finite part $\CP$ to an
+  infinitesimal point $\dV$
+\end{enumerate}
+
+\underline{Local forms of the balance equations}
+
+\begin{center}
+  \scriptsize
+  \begin{tabular}{r l}
+    Mass & $\dot{\rho} = 0$ \\
+    Momentum & $\rho\dot{\Vv} = \div\Bsigma+\rho\Vb$ \\
+    Angular momentum& $\Bsigma=\Bsigma\tra$\\
+    Internal energy (1\textsuperscript{st}Law) & $\rho\dot{e}=\Bsigma:\dot{\Bveps}+\rho r - \div\Vq$\\
+    Entropy (2\textsuperscript{nd}Law) & $\rho\gamma=\rho\dot{\eta}-\frac{1}{\theta}\rbr{\rho
+                                         r-\div\Vq} - \frac{1}{\theta^2}\Vq\cdot\nabla\theta\geq0$\\
+  \end{tabular}
+\end{center}
+
+
+\subsection{Material Equations of Continuum Mechanics}
+\subsubsection{Thermodynamic Consistency}
+Multiply entropy inequality with $\theta$ and substitute $\sbr{\rho r -
+  \div\Vq}$ from internal energy balance.
+\begin{equation}
+  \rho\CD := \rho\theta\eta =
+  \boxed{\Bsigma:\dot{\Bveps}-\rho\dot{e}+\rho\theta\dot{\eta}-\frac{1}{\theta}\Vq\cdot\nabla\theta}
+  \geq 0
+\end{equation}
+Split into Clausius--Planck and Fourier Inequalities (CPI) and (FI).
+\begin{align}
+  \nonumber \rho\CD_{\textup{loc}} & := \Bsigma:\dot{\Bveps}-\rho\dot{e}+\rho\theta\dot{\eta}
+                                     \geq 0 \quad \textup{(CPI)}\\
+  \rho\CD_{\textup{con}} & := -\frac{1}{\theta}\Vq\cdot\nabla\theta \geq 0 \quad \textup{(FI)}
+\end{align}
+%
+Obtain free energy through Legendre transformation $\boxed{\psi:=e -
+  \theta\eta}$ ,
+$\dot{e} = \dot{\psi} + \theta\dot{\eta} + \dot{\theta}\eta$.
+%
+% \begin{align}
+\begin{empheq}[box=\widefbox]{align}
+  \nonumber \rho\CD_{\textup{loc}} & := \Bsigma:\dot{\Bveps}-\rho\eta\dot{\theta}-\dot{\psi}
+                                     \geq 0 \quad \textup{(CPI)}\\
+  \rho\CD_{\textup{con}} & := -\frac{1}{\theta}\Vq\cdot\nabla\theta \geq 0 \quad \textup{(FI)}
+\end{empheq}
+% \end{align}
+
+\subsubsection{General Internal Variable Formulations}
+Typical examples of internal variable fields:
+viscous strain $\Bveps_v\in\sym(3)\in\IR^6$,
+plastic strain $\Bveps_p\in\sym(3)\in\IR^6$,
+isotropic hardening variable $\alpha\in\IR$ etc.
+
+A generalized vector of internal variables $\CBI\in\IR^n$ is defined, e.g. for
+elastoplastic material with isotropic hardening
+$\CBI:=\cbr{\Bveps^p,\alpha}\in\IR^{6+1}$. The internal force dual to
+$\CBI\in\IR^n$ is defined as $\CBF\in\IR^n$ .
+
+Canonical dissipative materials are based on two constitutive functions
+
+\begin{itemize}
+\item energy storage function $\psi:=\widehat{\psi}(\Bveps,\theta,\CBI)$
+\item dissipation potential function $\phi:=\widehat{\phi}(\CBF)$
+\end{itemize}
+
+\subsubsection{Coleman's Exploitation Method}
+Insert $\dot{\psi}=\partial_{\Bveps}\psi:\dot{\Bveps}
++ \partial_\theta\psi\dot{\theta} + \partial_\CBI\psi\cdot\dot{\CBI}$
+into (CPI):
+
+\begin{equation}
+\rho\CD_{\textup{loc}} := [\Bsigma-\rho\partial_{\Bveps}\psi]:\dot{\Bveps}
+-\rho[\eta+\partial_\theta\psi]\cdot\dot{\theta}
+-\rho\partial_\CBI\psi\cdot\dot{\CBI}
+\geq 0
+\end{equation}
+Result:
+\begin{empheq}[box=\widefbox]{align}
+\nonumber  \Bsigma &:= \rho\partial_{\Bveps}(\Bveps,\theta,\CBI) \\
+  \eta &:= -\partial_\theta\psi(\Bveps,\theta,\CBI)
+\end{empheq}
+Reduced dissipation inequality
+
+\begin{equation}
+\rho\CD_{\textup{loc}} := \CBF\cdot\dot{\CBI} \geq 0 \label{eq:cpired}
+\end{equation}
+where
+\begin{equation}
+  \boxed{\CBF := - \rho\partial_\CBI\psi(\Bveps,\theta,\CBI)}
+\end{equation}
+(\ref{eq:cpired}) says that the forces $\CBF$ drive the evolution $\dot{\CBI}$
+of internal variables, i.e. $\dot{\CBI}=f(\CBF)$. Written in terms of the
+dissipative potential function
+\begin{equation}
+  \boxed{\dot{\CBI} = \partial_\CBF\phi(\CBF)}
+\end{equation}
+which requires the definition of initial conditions
+\begin{equation}
+  \CBI(\Vx,t=t_0) := \CBI_0
+\end{equation}
+Reduced local dissipation becomes
+\begin{equation}
+  \rho\CD_\textup{loc} = \CBF\cdot\partial_\CBF\phi(\CBF)\geq 0
+\end{equation}
+
+
+
+% \subsection{IBVP for Thermodynamic Deformation of Inelastic Solids}
+
+
+\section{Linear and Nonlinear Elasticity}
+
+\subsection{Basic Constitutive Equations}
+No internal variables:
+
+\begin{equation}
+  \psi = \widehat{\psi}(\Bveps) \quad , \quad  \Bsigma=\partial_{\Bveps}\psi
+\end{equation}
+
+Stress rate:
+\begin{equation}
+  \dot{\Bsigma} = \BBC:\dot{\Bveps} \quad , \quad
+  \dot{\sigma}_{ij}=C_{ijkl}\,\dot{\vareps}_{kl}
+\end{equation}
+where the 4\textsuperscript{th} order elasticity tensor is defined as
+\begin{equation}
+  \BBC := \partial_{\Bveps}\Bsigma = \partial^2_{\Bveps{}\Bveps{}}\psi
+\end{equation}
+For linear elasticity, $\BBC$ is constant, whereas for nonlinear elasticity, it
+is a function of strain $\BBC=\widehat{\BBC}(\Bveps)$
+
+\subsection{Isotropic Elasticity}
+
+\subsubsection{Representation of the Free Energy}
+
+\begin{equation}
+  \psi = \widehat{\psi}(\VQ\Bveps\VQ\tra)=\widehat{\psi}(\Bveps) \quad \forall\VQ\in\sothree
+\end{equation}
+
+where $\VQ$ is a proper rotation in \sothree
+\begin{equation}
+  \sothree = \cbr{\VQ \,\evat\, \VQ\tra\VQ=\Vone,\, \det\VQ=+1} \label{eq:elas1}
+\end{equation}
+
+Spectral decomposition of the strain:
+\begin{equation}
+  \Bveps\Vn_i = \eps\,\Vn_i \OR \sbr{\Bveps-\eps\Vone}\,\Vn_i=\Vzero
+\end{equation}
+Principal strains $\cbr{\eps_i}$ and principal directions $\cbr{\Vn_i}$ can be
+obtained by the solution of the characteristic equation
+\begin{equation}
+  \det\rbr{\Bveps-\eps_i\Vone}=\eps_i^3-\Rone_\veps\eps_i^2+\Rtwo_\veps\eps_i-\Rthree_\veps
+\end{equation}
+Spectral form representation of the strain
+\begin{equation}
+  \Bveps =\textstyle \sum\limits_{i=1}^3 \eps_i\,\,\Vn_i\otimes\Vn_i
+\end{equation}
+
+The invariants $\Rone_\veps$, $\Rtwo_\veps$, $\Rthree_\veps$ read
+\begin{equation}
+  \boxed{\Rone_\veps=\tr\Bveps}\,;\quad
+  \boxed{\Rtwo_\veps=\half\cbr{\Rone_\veps^2-\tr(\Bveps^2)}}\,;\quad
+  \boxed{\Rthree_\veps = \det\Bveps}
+\end{equation}
+%
+Using (\ref{eq:elas1}), this yields
+%
+\begin{equation}
+\textstyle  \widehat{\psi}\rbr{\sum\limits_{i=1}^3 \eps_i\,(\VQ\Vn_i)\otimes(\VQ\Vn_i)}
+  = \widehat{\psi}\rbr{\sum\limits_{i=1}^3 \eps_i\,\,\Vn_i\otimes\Vn_i}
+\end{equation}
+%
+$\widehat{\psi}$ cannot depend on the eigenvectors (principal directions)
+$\cbr{\Vn_i}$ which are arbitrarily rotated by $\VQ\in\sothree$.
+Principal strain representation for isotropic elasticity:
+%
+\begin{equation}
+  \widehat{\psi}_\textup{iso}(\Bveps) = \bar{\psi}(\eps_1,\eps_2,\eps_3)
+\end{equation}
+Since $\cbr{\eps_i}$ are determined by three invariants $\Rone_\veps=I_1$,
+$\Rtwo_\veps=I_2$, $\Rthree_\veps=I_3$, one can
+alternatively define invariant representation
+%
+\begin{equation}
+  \widehat{\psi}_\textup{iso}(\Bveps) = \widetilde{\psi}(I_1,I_2,I_3)
+\end{equation}
+State of isotropic elasticity is a reduced space $\IR^3$ (principal strain
+space) instead of $\IR^6$ of symmetric tensors.
+
+\subsubsection{Representation in the Principal Stress Space}
+\begin{equation}
+  \Bsigma = \epartd{\bar{\psi}}{\Bveps}=
+  \sum\limits_{i=1}^{3}
+  \underbrace{\partd{\bar{\psi}}{\eps_i}}_\text{$\bar{\sigma}_i$}
+  \underbrace{\partd{\eps_i}{\Bveps}}_\text{$\Vn_i\otimes\Vn_i$}
+\end{equation}
+yielding the spectral representation of stress
+\begin{equation}
+  \Bsigma=\suml{i=1}{3}\bar{\sigma}_i\,\Vn_i\dyc\Vn_i \WITH \bar{\sigma}_i:=\bar{\psi}_{,i}
+\end{equation}
+Tangent modulus, using chain rule:
+%
+\begin{align}
+ \nonumber \BBC &= \textstyle  \partial^2_{\Bveps\Bveps}\bar{\psi} = \partial_{\Bveps}\Bsigma
+  = \partial_{\Bveps{}} \rbr{\suml{i=1}{3}\bar{\sigma}_i\,\Vn_i\dyc\Vn_i} \\
+  \nonumber  & \textstyle = \suml{i=1}{3}\suml{j=1}{3} \bar{C}_{ij}\,\Vn_i\dyc\Vn_i\dyc\Vn_j\dyc\Vn_j \\
+             & \textstyle + \suml{i=1}{3}\suml{j\neq i}{3}\half
+               \frac{\bar{\sigma}_i-\bar{\sigma}_j}{\eps_i-\eps_j}
+               \Vn_i\dyc\Vn_j\dyc\rbr{\Vn_i\dyc\Vn_j+\Vn_j\dyc\Vn_i}
+\end{align}
+where $\bar{C}_{ij}:=\bar{\psi}_{,ij}$.
+
+\subsubsection{Representation in the Invariant Space}
+\begin{equation}
+  \Bsigma = \epartd{\widetilde{\psi}}{\Bveps}=
+  \suml{i=1}{3}
+  \underbrace{\partd{\widetilde{\psi}}{I_i}}_\text{$\widetilde{\sigma}_i$}
+  \underbrace{\partd{I_i}{\Bveps}}_\text{$\Vb_i$}
+\end{equation}
+where
+\begin{align}
+  \nonumber \Vb_1 &= \epartd{I_1}{\Bveps} = \Vone\\
+  \nonumber \Vb_2 &= \epartd{I_2}{\Bveps} = I_1\Vone-\Bveps\\
+   \Vb_3 &= \epartd{I_3}{\Bveps} =I_3\Bveps^{-1}
+\end{align}
+
+\begin{align}
+ \nonumber \BBC &= \textstyle  \partial^2_{\Bveps\Bveps}\widetilde{\psi} = \partial_{\Bveps}\Bsigma
+  = \partial_{\Bveps{}} \rbr{\suml{i=1}{3}\widetilde{\sigma}_i\,\Vb_i} \\
+  \nonumber  &  =
+               \suml{i=1}{3}\suml{j=1}{3} \partd{^2\widetilde{\psi}}
+               {I_i\partial I_j} \Vb_i\dyc\Vb_j
+               + \suml{i=1}{3}
+               \partd{\widetilde{\psi}}{I_i}
+               \underbrace{\epartd{\Vb_i}{\veps}}_\text{$\BBB_i$}
+\end{align}
+Here
+\begin{align}
+  \nonumber \BBB_1 &= \epartd{\Vb_1}{\Bveps} = \IIzero\\
+  \nonumber \BBB_2 &= \epartd{\Vb_2}{\Bveps} = \Vone\dyc\Vone - \BBI\\
+   \BBB_3 &= \epartd{\Vb_3}{\Bveps} = I_3 \Bveps^{-1}\dyc\Bveps^{-1}+I_3\BBI_{\Bveps^{-1}}
+\end{align}
+with the following rank 4 identity tensors
+\begin{align}
+  \nonumber \BBI = I_{ijkl} &= \half(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}) \\
+  \BBI_{\Bveps^{-1}} = I_{\Bveps^{-1},ijkl}&= \half (\Bveps^{-1}_{ik}\Bveps^{-1}_{jl}+\Bveps^{-1}_{il}\Bveps^{-1}_{jk})
+\end{align}
+
+\subsubsection{Model Problem: Linear Isotropic Elasticity}
+
+\subsection{Decoupled Volumetric--Isochoric Elasticity}
+
+\subsection{Anisotropic Elasticity}
+
+\subsubsection{Representation in terms of Structured Tensors}
+
+\subsubsection{Coordinate free Anisotropy}
+
+\subsection{Finite Element Formulation} % exercise 1
+
+\section{Linear and Nonlinear Viscoelasticity}
+
+\subsection{General Internal Variable Formulation}
+
+\subsubsection{Reduced Representation}
+
+\subsubsection{Convolution Representation}
+
+\subsection{3d Formulation}
+\subsubsection{Volumetric Elasticity -- Isochoric Viscoelasticity}
+\subsubsection{Alternative Representation}
+
+\subsection{Stress \& Tangent Modulus Updates}
+\subsubsection{Algorithm for Rep.B}
+\subsubsection{Algorithm for Convolution Rep.}
+
+
+\section{Rate Independent Plasticity}
+
+\subsection{Ideal Plasticity}
+
+\subsubsection{Elastic Stress Response}
+
+\subsubsection{Dissipative Plastic Stress Response}
+
+\subsubsection{Modulus}
+
+\subsubsection{Model Problem}
+
+
+\subsubsection{Algorithm: Radial Return Mapping}
+
+\paragraph{Stress}
+
+\paragraph{Tangent Modulus}
+
+\section{Rate Independent Plasticity with Hardening}
+
+\subsubsection{Combined Isotropic and Kinematic Hardening}
+
+\subsubsection{Algorithm}
+
+\paragraph{Stress}
+
+\paragraph{Tangent Modulus}
+
+\section{Rate Dependent Plasticity}
+
+\subsection{Perzyna-type Plasticity for von-Mises Model}
+
+\subsection{Algorithm}
+
+\rule{0.3\linewidth}{0.25pt}\\
+\scriptsize
+% Copyright \copyright\ 2014 Onur Solmaz\\
+\href{http://github.com/nrs/cm-c1-cheatsheet}{http://github.com/nrs/cm-c1-cheatsheet}
+
+
+\end{multicols*}
+\end{document}
