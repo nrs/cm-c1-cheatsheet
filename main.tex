@@ -388,7 +388,7 @@ obtained by the solution of the characteristic equation
 \end{equation}
 Spectral form representation of the strain
 \begin{equation}
-  \Bveps =\textstyle \sum\limits_{i=1}^3 \eps_i\,\,\Vn_i\otimes\Vn_i
+  \Bveps =\textstyle \sum\limits_{i=1}^3 \eps_i\,\,\Vn_i\otimes\Vn_i \label{eq:specstrain}
 \end{equation}
 
 The invariants $\Rone_\veps$, $\Rtwo_\veps$, $\Rthree_\veps$ read
@@ -431,7 +431,8 @@ space) instead of $\IR^6$ of symmetric tensors.
 \end{equation}
 yielding the spectral representation of stress
 \begin{equation}
-  \Bsigma=\suml{i=1}{3}\bar{\sigma}_i\,\Vn_i\dyc\Vn_i \WITH \bar{\sigma}_i:=\bar{\psi}_{,i}
+  \Bsigma=\suml{i=1}{3}\bar{\sigma}_i\,\Vn_i\dyc\Vn_i \WITH
+  \bar{\sigma}_i:=\bar{\psi}_{,i} \label{eq:specstress}
 \end{equation}
 Tangent modulus, using chain rule:
 %
@@ -478,24 +479,193 @@ Here
 with the following rank 4 identity tensors
 \begin{align}
   \nonumber \BBI = I_{ijkl} &= \half(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}) \\
-  \BBI_{\Bveps^{-1}} = I_{\Bveps^{-1},ijkl}&= \half (\Bveps^{-1}_{ik}\Bveps^{-1}_{jl}+\Bveps^{-1}_{il}\Bveps^{-1}_{jk})
+  \BBI_{\Bveps^{-1}} = I_{\Bveps^{-1},ijkl}&= \half (\veps^{-1}_{ik}\veps^{-1}_{jl}+\veps^{-1}_{il}\veps^{-1}_{jk})
 \end{align}
 
 \subsubsection{Model Problem: Linear Isotropic Elasticity}
+\begin{equation}
+  \Bsigma = \BBC : \Bveps \WITH \BBC=\lambda \Vone\dyc\Vone + 2\mu\BBI
+\end{equation}
+\begin{equation}
+  \widehat{\psi}(\Bveps) = \half \Bveps:\BBC:\Bveps
+\end{equation}
+Insert spectral representation (\ref{eq:specstrain}) into free energy.
+\begin{align}
+  \nonumber \widehat{\psi}(\eps_1,\eps_2,\eps_3)
+  &= \textstyle \half \rbr{\suml{i=1}{3} \eps_i\,\,\Vn_i\otimes\Vn_i}
+    :\BBC :
+    \rbr{\suml{j=1}{3} \eps_j\,\,\Vn_j\dyc\Vn_j}\\
+  &= \half\lambda\,(\underbrace{\eps_1+\eps_2+\eps_3}_\text{$\tr(\Bveps)^2=I_1^2$})^2
+  +\mu\,(\underbrace{\eps_1^2+\eps_2^2+\eps_3^2}_\text{$\tr(\Bveps^2)=I_2$})
+\end{align}
+Principle stress:
+\begin{equation}
+  \bar{\sigma}_i = \bar{\psi}_{,i} = \partd{\bar{\psi}}{\eps_i}
+  = \lambda\rbr{\eps_1+\eps_2+\eps_3}+2\mu\eps_i
+\end{equation}
+Inserting into (\ref{eq:specstress}) yields the stress:
+\begin{equation}
+  \Bsigma = \rbr{\eps_1+\eps_2+\eps_3}
+  \underbrace{\suml{i=1}{3} \Vn_i\dyc\Vn_i}_\text{$\Vone=\delta_{ij}$}
+  +2\mu\underbrace{\suml{i=1}{3} \eps_i\,\Vn_i\dyc\Vn_i}_\text{$\Bveps$}
+\end{equation}
+\begin{equation}
+  \boxed{\Bsigma=\lambda\tr\rbr{\Bveps}\Vone+2\mu\Bveps}
+\end{equation}
 
 \subsection{Decoupled Volumetric--Isochoric Elasticity}
-
+To model varying \emph{volumetric} vs \emph{isochoric} response in materials, a
+decoupled formulation of the free energy is used based on the
+\emph{spherical-deviatoric} split of the strain tensor:
+\begin{equation}
+  \boxed{\Bveps = \third e \Vone + \Bveps'}
+  \WITH \boxed{e=\tr\rbr{e}}\, ,
+  \boxed{\Bveps'=\dev\rbr{\Bveps} = \Bveps - \third e \Vone}
+\end{equation}
+An additive split of the free energy into \emph{volumetric} and \emph{isochoric}
+contributions is assumed
+\begin{equation}
+  \widehat{\psi}\rbr{\Bveps}=\psi_\textup{vol}\rbr{e} + \psi_\textup{iso}\rbr{\Bveps'}
+\end{equation}
+Stress and tangent modulus is obtained by chain rule
+\begin{equation}
+  \Bsigma := \epartd{\widehat{\psi}}{\Bveps} =
+  \partd{\psi_\textup{vol}}{e}\partd{e}{\Bveps}
+  + \partd{\psi_\textup{iso}}{\Bveps'}\partd{\Bveps'}{\Bveps}
+\end{equation}
+with the derivatives
+\begin{equation}
+  \epartd{e}{\Bveps} = \Vone \AND \epartd{\Bveps'}{\Bveps} = \BBP = \BBI -\third\Vone\dyc\Vone
+\end{equation}
+where $\BBP$ is the rank 4 projection tensor. Tangent modulus:
+\begin{equation}
+  \BBC := \epartd{\Bsigma}{\Bveps}
+  = \partd{^2\psi_\textup{vol}}{e\partial e} \Vone\dyc\Vone
+  + \BBP : \partd{^2\psi_\textup{iso}}{\Bveps'\partial\Bveps'}:\BBP
+\end{equation}
+Free energy function for linear elasticity is decomposed into:
+\begin{equation}
+  \psi_\textup{vol}=\half\kappa e^2 \AND \psi_\textup{iso}=\mu\,\Bveps':\Bveps'
+\end{equation}
+in terms of the bulk modulus $\kappa$ and the shear modulus $\mu$. The stress
+and tangent modulus then becomes
+\begin{equation}
+  \Bsigma=\kappa e\,\Vone+2\mu\Bveps' \AND \BBC=\kappa\,\Vone\dyc\Vone+2\mu\,\BBP
+\end{equation}
 \subsection{Anisotropic Elasticity}
+\begin{equation}
+  \psi = \widehat{\psi}(\VQ\Bveps\VQ\tra)=\widehat{\psi}(\Bveps) \quad
+  \forall\VQ\in \CG \subset \sothree \label{eq:aniso1}
+\end{equation}
+For isotropic materials, we have $\CG=\sothree$. By taking the derivative of
+(\ref{eq:aniso1}) with respect to $\Bveps$, we get the invariance constraint for
+the stress.
+\begin{equation}
+ \Bsigma(\VQ\Bveps\VQ\tra)=\VQ\Bsigma\rbr{\Bveps}\VQ\tra \quad
+  \forall\VQ\in \CG \subset \sothree \label{eq:aniso1}
+\end{equation}
+A further derivative by $\Bveps$ yields the constraint for the tangent modulus:
+\begin{equation}
+  C_{ijkl}(\VQ\Bveps\VQ\tra)=Q_{ia}Q_{jb}Q_{kc}Q_{ld}C_{abcd}\rbr{\Bveps}
+  \forall\VQ\in \CG \subset \sothree \label{eq:aniso1}
+\end{equation}
 
 \subsubsection{Representation in terms of Structured Tensors}
+A coordinate independent representation of $\widehat{\psi}$ is achieved by the
+introduction of \emph{structural tensors}, which reflect the microstructure of
+the anisotropic material. As an example, consider a composite that consists of
+fibers embedded into a matrix. Such a structure has the following symmetry group:
+TODO: insert figure
+\begin{equation}
+  \CG:=\cbr{\VQ_{\perp\Va},\VQ_{\parallel\Va}} \subset \sothree
+\end{equation}
+Here, $\Va$ with $\Norm{\Va}=1$ is a structural vector normal to the laminate
+direction. The rank 2 tensor
+\begin{equation}
+  \VM = \Va \dyc \Va
+\end{equation}
 
+is the structural tensor of the above given microstructure with the following
+feature
+\begin{equation}
+  \VQ\VM\VQ\tra=\VM \quad \forall\VQ\in\CG
+\end{equation}
+
+Anisotropic free energy function $\widehat{\psi}\rbr{\Bveps}$ is modeled by an
+isotropic free energy with extended list of arguments
+\begin{equation}
+  \widehat{\psi}\rbr{\Bveps}=\bar{\psi}\rbr{\Bveps,\VM}
+\end{equation}
+For rank 2 structural tensor $\VM$, we have the constraint
+
+\begin{equation}
+  \bar{\psi}\rbr{\VQ\Bveps\VQ\tra,\VQ\VM\VQ\tra}=\bar{\psi}\rbr{\Bveps,\VM}
+  \quad \forall\VQ\in\sothree
+\end{equation}
+The representation of isotropic tensor function $\bar{\psi}$ is based on
+\emph{coupled invariants} of $\Bveps$ and $\VM$. There exists a set of 5
+invariants which define the irreducible tensor basis of the function
+$\bar{\psi}$ for transversal isotropy, consisting of ground invariants of
+$\Bveps$
+\begin{equation}
+  I_1=\tr\rbr{\Bveps}\COM I_2=\tr\rbr{\Bveps^2} \COM I_3=\tr\rbr{\Bveps^3}
+\end{equation}
+and two coupled invariants
+\begin{equation}
+  I_4=\tr\rbr{\Bveps\VM} \COM I_5=\tr\rbr{\Bveps^2\VM}
+\end{equation}
+\begin{equation}
+  \bar{\psi}\rbr{\Bveps,\VM}=
+  \widetilde{\psi}(\;\;\;
+    \underbrace{I_1,I_2,I_3}_\text{isotropy}
+    ,
+    \underbrace{I_4,I_5}_\text{anisotropy})
+\end{equation}
+The stress and tangent modulus is calculated by the chain rule
+\begin{equation}
+  \Bsigma = \epartd{\widehat{\psi}}{\Bveps}=
+  \suml{i=1}{5}\partd{\widetilde{\psi}}{I_i}\partd{I_i}{\Bveps} \label{eq:anisostress}
+\end{equation}
+\begin{align}
+\nonumber  \BBC = \epartd{\Bsigma}{\Bveps}
+  = \partial_{\Bveps{}\Bveps{}}^2\widehat{\psi}
+  &= \suml{i=1}{5}\suml{j=1}{5}\partd{^2\widetilde{\psi}}{I_i\partial I_j}\,
+    \partd{I_i}{\Bveps}\dyc\partd{I_j}{\Bveps} \\
+  &+ \suml{i=1}{5}\partd{\widetilde{\psi}}{I_i}\partd{^2I_i}{\Bveps\partial\Bveps} \\
+\end{align}
 \subsubsection{Coordinate free Anisotropy}
-
+\begin{equation}
+  \bar{\psi}\rbr{\Bveps,\VM}=
+  \underbrace{\half\lambda I_1^2 + \mu I_2}_{\substack{\text{isotropic elasticity}\\\text{of matrix}}}
+  + \underbrace{\half\beta I_4^2}_{\substack{\text{additional
+        energy}\\\text{storage due to fiber}}}
+\end{equation}
+$\lambda$, $\mu$ are the Lam\'e constants of the matrix and $\beta$ is the only
+parameter which governs the ``anisotropic effects''.
+\begin{equation}
+  I_4=\tr\rbr{\Bveps\VM}=\Bveps:\VM=\Bveps:\rbr{\Va\dyc\Va} = \Va\cdot\Bveps\Va=\eps_a
+\end{equation}
+Evaluate (\ref{eq:anisostress}) with
+\begin{equation}
+  \epartd{I_1}{\Bveps}=\Vone\COM \epartd{I_2}{\Bveps}=2\Bveps \AND
+  \epartd{I_4}{\Bveps} = \VM
+\end{equation}
+\begin{equation}
+  \Bsigma =
+  \underbrace{\lambda\tr\rbr{\Bveps}\Vone+2\mu\Bveps}
+  _{\substack{\text{standard isotropic}\\\text{elasticity}}}
+  + \underbrace{\beta\eps_a\VM}
+  _{\substack{\text{additional stres}\\\text{contribution in
+        the}\\\text{direction of fiber}}}
+\end{equation}
 \subsection{Finite Element Formulation} % exercise 1
 
 \section{Linear and Nonlinear Viscoelasticity}
+\subsection{General Internal Variable Formulation (1d)}
+\begin{equation}
+  \psi\rbr{\veps,\veci{\alpha}} = \half E_0\veps^2+\suml{i=1}{n}\half E_i\rbr{\veps-\alpha_i}^2
+\end{equation}
 
-\subsection{General Internal Variable Formulation}
 
 \subsubsection{Reduced Representation}
 
