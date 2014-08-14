@@ -7,6 +7,8 @@
 % \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{mdframed}
+\usepackage{fixltx2e}
+\usepackage[makeroom]{cancel}
 
 % hippopotato
 \usepackage{./hippopotato/hippopotato}
@@ -520,7 +522,7 @@ decoupled formulation of the free energy is used based on the
 \begin{equation}
   \boxed{\Bveps = \third e \Vone + \Bveps'}
   \WITH \boxed{e=\tr\rbr{e}}\, ,
-  \boxed{\Bveps'=\dev\rbr{\Bveps} = \Bveps - \third e \Vone}
+  \boxed{\Bveps'=\dev\rbr{\Bveps} = \Bveps - \third e \Vone} \label{eq:split1}
 \end{equation}
 An additive split of the free energy into \emph{volumetric} and \emph{isochoric}
 contributions is assumed
@@ -665,26 +667,187 @@ Evaluate (\ref{eq:anisostress}) with
 \begin{equation}
   \psi\rbr{\veps,\veci{\alpha}} = \half E_0\veps^2+\suml{i=1}{n}\half E_i\rbr{\veps-\alpha_i}^2
 \end{equation}
+\subsubsection{Representation A}
+Stress and internal forces
+\begin{equation}
+  \sigma=\epartd{\psi}{\veps} \AND \beta_i = -\epartd{\psi}{\alpha_i}
+\end{equation}
+\begin{align}
+  \nonumber  \sigma &= E_0\,\veps + \suml{i=1}{n}E_i\rbr{\veps-\alpha_i} \\
+  \beta_i &= E_i \rbr{\veps-\alpha_i}\label{eq:repa1}
+\end{align}
+\emph{Dissipation potential}, a smooth quadratic function:
+\begin{equation}
+\textstyle \phi^*(\veci{\beta}) = \suml{i=1}{n} \half\frac{1}{\eta_i}\beta_i^2
+\end{equation}
+%
+yields the evolution
+%
+\begin{align}
+  \dot{\alpha}_i &= \epartd{\phi^*}{\beta}\quad\textup{in the closed form} \\
+  \dot{\alpha}_i &= \frac{1}{\eta_i}\beta_i \COM \alpha_i\rbr{0} = 0
+\end{align}
+
+\subsubsection{Representation B (Reduced Representation)}
+
+Strain--like internal variables are removed by (\ref{eq:repa1})\textsubscript{2}
+and the viewpoint is restricted to internal forces:
+%
+\begin{equation}
+  \sigma = E_0\,\veps+\suml{i=1}{n}\beta_i
+\end{equation}
+%
+\begin{equation}
+  \textstyle \dot{\beta}_i=\linedot{E_i\rbr{\veps-\alpha_i}} =
+  E_i\rbr{\dot{\veps}\frac{1}{\eta_i}\beta_i}
+\end{equation}
+yields
+\begin{equation}
+  \dot{\beta}_i+\frac{1}{\tau_i}\beta_i = E_i\dot{\veps} \WITH \tau_i=\frac{\eta_i}{E_i}
+\end{equation}
 
 
-\subsubsection{Reduced Representation}
+\subsubsection{Representation C (Convolution Representation)}
+\begin{align}
+  &\dot{\alpha}_i=\frac{1}{\eta_i}E_i\rbr{\veps-\alpha_i} =
+  \frac{1}{\tau_i}\rbr{\veps-\alpha_i} \\
+  \Rightarrow\quad &\dot{\alpha}_i+\frac{1}{\tau_i}\alpha_i=\frac{1}{\tau_i}\veps
+\end{align}
+This evolution equation admits an \emph{integration factor} $\exp\rbr{t/\tau_i}$,
+i.e
+\begin{equation}
+  \ddt\sbr{\exp\rbr{t/\tau_i}\alpha_o(t)} = \frac{1}{\tau_i}\exp\rbr{t/\tau_i}\veps(t)
+\end{equation}
 
-\subsubsection{Convolution Representation}
+\begin{equation}
+  \int_0^t\ddx{s}\sbr{\exp\rbr{s/\tau_i}\alpha_o(t)} \Ud s =
+  \int_0^t\frac{1}{\tau_i}\exp\rbr{s/\tau_i}\veps(s)\Ud s
+\end{equation}
+%
+yielding
+%
+\begin{equation}
+  \exp\rbr{t/\tau_i}\alpha_i(t) -
+  \exp\rbr{0/\tau_i}\cancelto{0}{\alpha_i\rbr{0}}
+  = \int_0^t\frac{1}{\tau_i}\exp\rbr{s/\tau_i}\veps(s)\Ud s
+\end{equation}
+%
+with the initial condition for the internal variable $\alpha_i\rbr{0}=0$, a
+direct representation of the internal variable is obtained
+%
+\begin{equation}
+  \alpha_i(t)
+  = \int_0^t\frac{1}{\tau_i}\textstyle \exp\rbr{-\frac{(t-s)}{\tau_i}}\veps(s)\,\Ud s
+\end{equation}
+%
+With the initial condition $\veps(0)=0$, a partial integration of this integral
+($\int u'v = uv-\int u v'$) yields
+%
+\begin{equation}
+  \alpha_i(t)
+  = \veps(t) - \int_0^t\textstyle \exp\rbr{-\frac{(t-s)}{\tau_i}}\dot{\veps}(s)\,\Ud s
+\end{equation}
+%
+which can be directly inserted into the definition of stress
+%
+\begin{align}
+\nonumber \sigma(t) &= E_0\,\veps(t) +
+                      \suml{i=1}{n}E_i\rbr{\veps(t)-\alpha_i(t)} \\
+  &= E_0\,\veps(t)+ \suml{i=1}{n} E_i \int_0^t\textstyle
+    \exp\rbr{-\frac{(t-s)}{\tau_i}}\dot{\veps}(s)\,\Ud s \\
+  &= \int_0^t \underbrace{\sbr{E_0 + \suml{i=1}{n} E_i \textstyle
+    \exp\rbr{-\frac{(t-s)}{\tau_i}}}}_\text{$\widehat{E}(t-s)$}
+    \dot{\veps}(s)\,\Ud s
+\end{align}
+%
+where the viscous relaxation function $\widehat{E}(t)$ was defined. Hence
+%
+\begin{equation}
+  \boxed{\sigma(t) = \int_0^t \widehat{E}(t-s)\, \dot{\veps}(s)\,\Ud s}
+\end{equation}
 
 \subsection{3d Formulation}
 \subsubsection{Volumetric Elasticity -- Isochoric Viscoelasticity}
-\subsubsection{Alternative Representation}
+The split is applied same as in (\ref{eq:split1}). In view to the modeling of
+polymers, we consider (almost incompressible) volumetric part elastic and (very
+soft) isochoric part viscoelastic. The 1d setting is applied to the isochoric
+part, which is considered to be initially isotropic.
+\begin{align}
+  \nonumber \psi(\Bveps,\veci{\Balpha}) &= \half\kappa e^2 + \mu_0\,\Bveps':\Bveps'
+  + \suml{i=1}{n}\mu_i\Abs{\Bveps'-\Balpha_i}^2\\
+   \phi^*(\veci{\Bbeta}) &=
+  \suml{i=1}{n}\half\textstyle\frac{1}{\eta_i}\Abs{\Bbeta_i}^2
+\end{align}
+\begin{equation}
+  \Bsigma=\epartd{\psi}{\Bveps}\SEMI\Bbeta=-\epartd{\psi}{\Balpha}\SEMI
+  \dot{\Balpha}=\epartd{\phi^*}{\Bbeta}
+\end{equation}
 
+\subsubsection{Representation A}
+\begin{align}
+  \nonumber \Bsigma &= \kappa e \Vone +
+                      \rbr{2\mu_i\,\Bveps' +
+                      \suml{i=1}{n} 2\mu_i\rbr{\Bveps'-\Balpha_i}}:\BBP \\
+  \nonumber \Bbeta_i &= 2 \mu_i \rbr{\Bveps'-\Balpha_i} \\
+  \dot{\Balpha}_i &= \textstyle\frac{1}{\eta_i}\Bbeta_i
+\end{align}
+
+\subsubsection{Representation B}
+Convenient for experimental identification where both equilibrium stress and
+overstress are measured.
+\begin{align}
+  \nonumber \Bsigma &=
+                      \underbrace{\kappa e \Vone +
+                      2\mu_i\,\Bveps}_\text{eqm. stress}' +
+                      \underbrace{\textstyle\suml{i=1}{n} \Bbeta_i}_\text{viscous overstress} \\
+  \dot{\Bbeta}_i &+ \frac{1}{\tau_i}\Bbeta_i = 2 \mu_i \dot{\Bveps}'
+\end{align}
+
+
+\subsubsection{Representation C}
+\begin{equation}
+  \Bsigma(t)=\kappa e \Vone + \int_0^t 2
+  \widehat{\mu}(t-s)\dev\rbr{\dot{\Bveps}(s)}\Ud s
+\end{equation}
+with shear modulus relaxation function
+\begin{equation}
+  \textstyle \widehat{\mu}(t)=\mu_0+\suml{i=1}{n}\mu_i\exp\rbr{- \frac{(t-s)}{\tau_i}}
+\end{equation}
+The integral form with the relaxation function is called \emph{convolution
+  representation of viscoelasticity}. The relaxation contains all material
+parameters for the isochoric part. Total number of material parameters are:
+\begin{equation}
+  \CM := \cbr{\kappa, \mu_0, \mu_1, \tau_1, \ldots,\mu_n,\tau_n} \AND N = 2n+2
+\end{equation}
 \subsection{Stress \& Tangent Modulus Updates}
 \subsubsection{Algorithm for Rep.B}
+TODO:
 \subsubsection{Algorithm for Convolution Rep.}
-
+TODO:
 
 \section{Rate Independent Plasticity}
 
 \subsection{Ideal Plasticity}
-
+\begin{equation}
+  \textup{State}(\Vx) := \cbr{\Bveps\,\textup{(external)}, \Bveps^p\, \textup{(internal)}}
+\end{equation}
+where $\Bveps^p\in\IR^6$ is a symmetric rank 2 tensor variable denoted as
+plastic strain.
 \subsubsection{Elastic Stress Response}
+Definition of the elastic strain $\Bveps^e$ in the context of small
+deformations:
+\begin{equation}
+  \Bveps^e := \Bveps - \Bveps^p
+\end{equation}
+
+\begin{equation}
+  \psi=\widetilde{\psi}(\Bveps,\Bveps^p)=\widehat{\psi}(\Bveps-\Bveps^p)=\widehat{\psi}(\Bveps^e)
+\end{equation}
+%
+$\widetilde{\psi}$ is assumed to be a convex function which satisfies the
+normalization conditions ($\widehat{\psi}(\Bveps^e=0)=0$ and
+$\epartd{\widehat{\psi}}{\Bveps}(\Bveps^e=0)=0$)
+
 
 \subsubsection{Dissipative Plastic Stress Response}
 
